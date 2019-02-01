@@ -1,0 +1,13 @@
+micronaut:
+    application:
+        name: password-checker
+
+    server:
+        netty:
+            worker:
+                threads: 32 # number of netty worker threads
+
+    executors:
+        io:
+            type: fixed
+            nThreads: 75

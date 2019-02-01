@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: password.checker
+---
+testFramework: junit
+sourceLanguage: java
