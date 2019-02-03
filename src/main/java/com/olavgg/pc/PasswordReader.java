@@ -58,6 +58,7 @@ public class PasswordReader {
         out.close();
     }
 
+    @SuppressWarnings("unchecked")
     private void loadFilter(Path filterFilePath) throws IOException{
         int bufferSize = 1024 * 64;
         try (
