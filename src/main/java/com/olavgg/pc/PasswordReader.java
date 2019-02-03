@@ -3,31 +3,45 @@ package com.olavgg.pc;
 import com.github.mgunlogson.cuckoofilter4j.CuckooFilter;
 import com.google.common.hash.Funnels;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 
 public class PasswordReader {
 
-
-    /*public static CuckooFilter<byte[]> FILTER =
-            new CuckooFilter.Builder<>(
-                    Funnels.byteArrayFunnel(),
-                    551509767
-    )
-        .withFalsePositiveRate(0.001)
-        .withExpectedConcurrency(64)
-        .build();*/
-
     public static CuckooFilter<byte[]> FILTER;
 
-    public static void read() throws IOException {
-        //String filename = "/tank/rot/16.txt";
-        /*String filename = "/mnt/tank10/rot/16.txt";
+    public void read() throws IOException {
+        final Path filterFilePath = Paths.get("pw.filter");
+        final Path pwnedPassFilePath = Paths.get("16.txt");
+
+        if(Files.isRegularFile(filterFilePath)){
+            loadFilter(filterFilePath);
+        } else {
+            loadPasswords(pwnedPassFilePath);
+        }
+    }
+
+    private void loadPasswords(Path pwnedPassFilePath) throws IOException{
+
+        FILTER =
+                new CuckooFilter.Builder<>(
+                        Funnels.byteArrayFunnel(),
+                        551509767
+                )
+                .withFalsePositiveRate(0.001)
+                .withExpectedConcurrency(64)
+                .build();
+
         AtomicLong count = new AtomicLong();
-        try (Stream<String> linesStream = Files.lines(Paths.get(filename))) {
+        try (Stream<String> linesStream = Files.lines(pwnedPassFilePath)) {
             linesStream.forEach( line -> {
                 count.getAndIncrement();
                 if((count.get() % 1000000) == 0){
@@ -36,17 +50,13 @@ public class PasswordReader {
                 FILTER.put(line.getBytes());
             });
         }
+    }
 
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("pw.filter"));
-        out.writeObject(FILTER);
-        out.close();*/
-
-
+    private void loadFilter(Path filterFilePath) throws IOException{
         try {
-            String filename = "pw.filter";
-
-            InputStream buffer = new BufferedInputStream(
-                    new FileInputStream(filename)
+            InputStream buffer = Files.newInputStream(
+                    filterFilePath,
+                    StandardOpenOption.READ
             );
             ObjectInput input = new ObjectInputStream(buffer);
 
@@ -55,5 +65,4 @@ public class PasswordReader {
             System.out.println(e.getMessage());
         }
     }
-
 }

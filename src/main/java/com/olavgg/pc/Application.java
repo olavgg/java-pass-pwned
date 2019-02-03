@@ -15,7 +15,7 @@ public class Application {
     @EventListener
     void onStartup(ServerStartupEvent event) {
         try {
-            PasswordReader.read();
+            new PasswordReader().read();
         } catch (IOException e) {
             e.printStackTrace();
         }
