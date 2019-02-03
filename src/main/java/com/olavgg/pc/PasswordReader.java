@@ -3,10 +3,7 @@ package com.olavgg.pc;
 import com.github.mgunlogson.cuckoofilter4j.CuckooFilter;
 import com.google.common.hash.Funnels;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,11 +22,14 @@ public class PasswordReader {
         if(Files.isRegularFile(filterFilePath)){
             loadFilter(filterFilePath);
         } else {
-            loadPasswords(pwnedPassFilePath);
+            loadPasswords(pwnedPassFilePath, filterFilePath);
         }
     }
 
-    private void loadPasswords(Path pwnedPassFilePath) throws IOException{
+    private void loadPasswords(
+            Path pwnedPassFilePath,
+            Path filterFilePath
+    ) throws IOException{
 
         FILTER =
                 new CuckooFilter.Builder<>(
@@ -50,17 +50,30 @@ public class PasswordReader {
                 FILTER.put(line.getBytes());
             });
         }
+
+        ObjectOutputStream out = new ObjectOutputStream(
+                Files.newOutputStream(filterFilePath)
+        );
+        out.writeObject(FILTER);
+        out.close();
     }
 
     private void loadFilter(Path filterFilePath) throws IOException{
-        try {
-            InputStream buffer = Files.newInputStream(
-                    filterFilePath,
-                    StandardOpenOption.READ
-            );
-            ObjectInput input = new ObjectInputStream(buffer);
+        int bufferSize = 1024 * 64;
+        try (
+                InputStream fileInputStream = Files.newInputStream(
+                        filterFilePath,
+                        StandardOpenOption.READ
+                );
+                InputStream buffer = new BufferedInputStream(
+                        fileInputStream,
+                        bufferSize
+                );
+                ObjectInput input = new ObjectInputStream(buffer)
+        ){
 
             FILTER = (CuckooFilter<byte[]>)input.readObject();
+
         } catch (RuntimeException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
