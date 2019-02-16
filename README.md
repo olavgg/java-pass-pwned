@@ -35,7 +35,7 @@ transfer-encoding: chunked
 ```
 
 ```sh
-$ curl -I -XGET http://localhost:8080/password/password123456
+$ curl -I -XGET http://localhost:8080/sha1/f7c3bc1d808e04732adf679965ccc34ca7ae3441
 HTTP/1.1 200 OK
 Date: Sat, 16 Feb 2019 10:27:50 GMT
 connection: keep-alive
