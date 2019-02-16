@@ -14,7 +14,6 @@ public class Application {
 
     @EventListener
     void onStartup(ServerStartupEvent event) {
-        System.out.println("HERERE");
         try {
             new PasswordReader().read();
         } catch (IOException e) {
