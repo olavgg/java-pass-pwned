@@ -35,6 +35,14 @@ transfer-encoding: chunked
 ```
 
 ```sh
+$ curl -I -XGET http://localhost:8080/password/password123456
+HTTP/1.1 200 OK
+Date: Sat, 16 Feb 2019 10:27:50 GMT
+connection: keep-alive
+transfer-encoding: chunked
+```
+
+```sh
 curl -I -XGET http://localhost:8080/password/thispasswordisnotknownyet
 HTTP/1.1 404 Not Found
 Date: Sat, 16 Feb 2019 10:29:03 GMT

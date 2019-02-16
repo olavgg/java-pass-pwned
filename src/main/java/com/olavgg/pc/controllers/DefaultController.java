@@ -28,13 +28,14 @@ public class DefaultController {
                 Charsets.UTF_8
             )
             .toString()
-            .substring(0,16)
-            .toUpperCase();
+            .substring(0,16);
         return checkShasum(shasum);
     }
 
     private HttpStatus checkShasum(String shasum){
-        if(PasswordReader.FILTER.mightContain(shasum.getBytes())){
+        if(PasswordReader.FILTER.mightContain(
+                shasum.toUpperCase().getBytes()
+        )){
             return HttpStatus.OK;
         }
         return HttpStatus.NOT_FOUND;
