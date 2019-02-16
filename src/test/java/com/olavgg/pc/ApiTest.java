@@ -60,6 +60,17 @@ public class ApiTest {
     }
 
     @Test
+    public void testShasumWithLowercase(){
+        String shasum = "f7c3bc1d808e04732adf679965ccc34ca7ae344";
+        HttpResponse response =
+            client
+                .toBlocking()
+                .exchange(HttpRequest.GET("/sha1/" + shasum));
+
+        assertEquals(200, response.getStatus().getCode());
+    }
+
+    @Test
     public void testPasswordOk(){
         HttpResponse response =
                 client

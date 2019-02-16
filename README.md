@@ -15,7 +15,7 @@ Extract it and create a new file with just 16 chars long sha1 records
 Copy it to the project folder.
 
 ## Building
-```sh ./gradlew build```
+```sh ./gradlew assemble```
 
 ## Testing
 This will also run a filter quality test that will fail if you get a false negative
