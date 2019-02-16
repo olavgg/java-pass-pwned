@@ -2,6 +2,7 @@
 Microservice for checking for password that has been pwned, works with Java 11.
 
 Requires only a 680MB heap with Java 11
+
 Java 8 may need up to 900MB
 
 Inspired by https://www.bloomingpassword.fun/
