@@ -3,6 +3,9 @@ Microservice for checking for password that has been pwned, works with Java 11.
 
 Requires only a 680MB heap
 
+Inspired by https://www.bloomingpassword.fun/
+
+## Getting started
 Download the SHA-1 password database https://haveibeenpwned.com/Passwords
 
 Extract it and create a new file with just 16 chars long sha1 records
