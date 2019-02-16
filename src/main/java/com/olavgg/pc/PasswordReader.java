@@ -36,7 +36,7 @@ public class PasswordReader {
                         Funnels.byteArrayFunnel(),
                         551509767
                 )
-                .withFalsePositiveRate(0.001)
+                .withFalsePositiveRate(0.08)
                 .withExpectedConcurrency(64)
                 .build();
 

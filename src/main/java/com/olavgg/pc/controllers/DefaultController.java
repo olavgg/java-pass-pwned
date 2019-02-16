@@ -14,7 +14,10 @@ public class DefaultController {
 
     @Get("/sha1/{shasum}")
     public HttpStatus sha1(@NotBlank String shasum) {
-        return checkShasum(shasum);
+        if(shasum.length() > 15){
+            return checkShasum(shasum.substring(0, 16));
+        }
+        return HttpStatus.BAD_REQUEST;
     }
 
     @Get("/password/{password}")
