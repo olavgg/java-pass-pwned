@@ -1,5 +1,6 @@
 # java-pass-pwned
-Microservice for checking for password that has been pwned, works with Java 11
+Microservice for checking for password that has been pwned, works with Java 11.
+
 Requires only a 680MB heap
 
 Download the SHA-1 password database https://haveibeenpwned.com/Passwords
@@ -13,7 +14,7 @@ Copy it to the project folder.
 ```./gradlew build```
 
 ## Testing
-This will also run a filter quality test that will fail if you get a false positive
+This will also run a filter quality test that will fail if you get a false negative
 
 ```./gradlew test```
 
