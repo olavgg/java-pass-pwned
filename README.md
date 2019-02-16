@@ -25,6 +25,10 @@ This will also run a filter quality test that will fail if you get a false negat
 ## Run
 ```$ java -Xmx680M -jar build/libs/password.checker-all.jar```
 
+First run will take a few minutes as you will need to load all hashes into the
+cuckoo filter. It will also serialize the cuckoo filter to disk. 
+Next runs will be just a few seconds.
+
 ## Test with curl
 ```sh
 $ curl -I -XGET http://localhost:8080/password/password123456
