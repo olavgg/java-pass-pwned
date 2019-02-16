@@ -1,5 +1,6 @@
 # java-pass-pwned
 Microservice for checking for password that has been pwned, works with Java 11
+Requires only a 680MB heap
 
 Download the SHA-1 password database https://haveibeenpwned.com/Passwords
 
@@ -11,4 +12,10 @@ Copy it to the project folder.
 ## Building
 ```./gradlew build```
 
-```java -Xmx1500M -jar build/libs/password.checker-all.jar```
+## Testing
+This will also run a filter quality test that will fail if you get a false positive
+
+```./gradlew test```
+
+## Run
+```java -Xmx680M -jar build/libs/password.checker-all.jar```
