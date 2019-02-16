@@ -10,20 +10,20 @@ Download the SHA-1 password database https://haveibeenpwned.com/Passwords
 
 Extract it and create a new file with just 16 chars long sha1 records
 
-`sh cut -c 1-16 pwned-passwords-ordered-by-count.txt > 16.txt`
+`$ cut -c 1-16 pwned-passwords-ordered-by-count.txt > 16.txt`
 
 Copy it to the project folder.
 
 ## Building
-```sh ./gradlew assemble```
+```$ ./gradlew assemble```
 
 ## Testing
 This will also run a filter quality test that will fail if you get a false negative
 
-```sh ./gradlew test```
+```$ ./gradlew test```
 
 ## Run
-```sh java -Xmx680M -jar build/libs/password.checker-all.jar```
+```$ java -Xmx680M -jar build/libs/password.checker-all.jar```
 
 ## Test with curl
 ```sh
@@ -43,7 +43,7 @@ transfer-encoding: chunked
 ```
 
 ```sh
-curl -I -XGET http://localhost:8080/password/thispasswordisnotknownyet
+$ curl -I -XGET http://localhost:8080/password/thispasswordisnotknownyet
 HTTP/1.1 404 Not Found
 Date: Sat, 16 Feb 2019 10:29:03 GMT
 transfer-encoding: chunked
