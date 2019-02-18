@@ -1,9 +1,9 @@
 # java-pass-pwned
 Microservice for checking for password that has been pwned, works with Java 11.
 
-Requires only a 680MB heap with Java 11
+Requires only a 1500MB heap with Java 11
 
-Java 8 may need up to 900MB
+Java 8 may need up to 2000MB
 
 Inspired by https://www.bloomingpassword.fun/
 
@@ -20,12 +20,10 @@ Copy it to the project folder.
 ```$ ./gradlew assemble```
 
 ## Testing
-This will also run a filter quality test that will fail if you get a false negative
-
 ```$ ./gradlew test```
 
 ## Run
-```$ java -Xmx680M -jar build/libs/password.checker-all.jar```
+```$ java -Xmx1500M -jar build/libs/password.checker-all.jar```
 
 First run will take a few minutes as you will need to load all hashes into the
 cuckoo filter. It will also serialize the cuckoo filter to disk. 
